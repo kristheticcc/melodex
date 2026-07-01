@@ -1,4 +1,3 @@
-# For building knowledge dictionary
 # Imports
 import glob
 from pathlib import Path

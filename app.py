@@ -1,10 +1,15 @@
 # Imports
 import gradio as gr
-from knowledge import build_knowledge_dict
+from chat import chat
 def main():
-    print("Hello from melodex!")
-    k = build_knowledge_dict()
-    print(k["twice"])
+
+    # Simple gradio interface for now
+    view = gr.ChatInterface(
+        fn = chat,
+        title = "Melodox",
+    )
+
+    view.launch()
 
 
 if __name__ == "__main__":
