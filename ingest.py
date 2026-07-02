@@ -5,7 +5,7 @@ import numpy
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_chroma import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from config import embedding_model
+from config import embedding
 
 # Function to check the knowledge base
 def knowledge_base_check():
@@ -17,7 +17,7 @@ def knowledge_base_check():
             full_content+=f.read()
     return f"Number of files = {len(files)} | Number of characters = {len(full_content)}"
 
-# Function to create load documents from knowledge base
+# Function to load documents from knowledge base
 def load_knowledge_base():
     documents = []
 
@@ -48,11 +48,32 @@ def chunk_documents(docs):
 
 # Function to create chroma vector store
 def create_vector_store():
+    # Checking the knowledge base
     check = knowledge_base_check()
     print(check)
+
+    # Loading the data into documents
     docs = load_knowledge_base()
+
+    # Splitting the document into multiple chunks
     chunks, chunk_len = chunk_documents(docs)
     print(chunk_len)
 
+    # Vector database name
+    db_name = "vector_db"
 
+    # If database already exists, delete it before creating a new one
+    if os.path.exists(db_name):
+        Chroma(persist_directory=db_name, embedding_function=embedding).delete_collection()
+
+    # Creating a vector store
+    vector_store = Chroma.from_documents(
+        chunks,
+        embedding = embedding,
+        persist_directory = db_name
+    )
+
+    print(f"Vector database created with {vector_store._collection.count()} documents")
+
+create_vector_store()
 
