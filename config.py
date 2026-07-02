@@ -2,6 +2,7 @@
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
+from langchain_huggingface import embeddings
 
 # Loading environment variables
 load_dotenv(override = True)
@@ -13,3 +14,4 @@ client = OpenAI(base_url = base_url, api_key = api_key)
 
 # models
 model = "openai/gpt-oss-120b"
+embedding_model = "all-MiniLM-L6-v2"
