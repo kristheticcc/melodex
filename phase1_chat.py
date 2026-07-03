@@ -1,5 +1,5 @@
 # Imports
-from config import client, model
+from config import client, chat_model
 from phase1_knowledge import build_knowledge_dict
 
 # Knowledge dictionary
@@ -30,6 +30,6 @@ def chat(message, history):
 
     messages = [{"role": "system", "content": system_message}, {"role": "user", "content": message}]
 
-    response = client.chat.completions.create(model = model, messages = messages)
+    response = client.chat.completions.create(model = chat_model, messages = messages)
 
     return response.choices[0].message.content

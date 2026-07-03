@@ -11,11 +11,6 @@ SYSTEM_PROMPT_TEMPLATE = """
 
 def question_answer(message, history):
     docs = retriever.invoke(message) # Extracting relevant content from the vector store
-    for doc in docs:
-        print(doc.metadata)
-        print(doc.page_content[:200])
-        print("---")
-    print("docs retrieved: ", len(docs))
     context = "\n".join(doc.page_content for doc in docs) # Extracting the page content
 
     system_prompt = SYSTEM_PROMPT_TEMPLATE.format(context = context)
@@ -27,4 +22,4 @@ def question_answer(message, history):
 
     return response.content
 
-print(question_answer("Who is Hanni", []))
+
