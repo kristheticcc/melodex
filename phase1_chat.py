@@ -1,6 +1,6 @@
 # Imports
 from config import client, model
-from knowledge import build_knowledge_dict
+from phase1_knowledge import build_knowledge_dict
 
 # Knowledge dictionary
 knowledge = build_knowledge_dict()

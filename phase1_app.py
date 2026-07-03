@@ -1,6 +1,6 @@
 # Imports
 import gradio as gr
-from chat import chat
+from phase1_chat import chat
 def main():
 
     # Simple gradio interface for now
