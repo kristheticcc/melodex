@@ -28,3 +28,6 @@ vector_store = Chroma(persist_directory = DB_NAME, embedding_function = embeddin
 # Retriever and generator
 llm = ChatGroq(model = chat_model, temperature = 0, api_key = api_key)
 retriever = vector_store.as_retriever()
+
+# Judge LLM for evaluation
+judge = "openai/gpt-oss-120b"
