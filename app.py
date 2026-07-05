@@ -5,7 +5,7 @@ def main():
     # Simple gradio interface for now
     view = gr.ChatInterface(
         fn = question_answer,
-        title = "Melodox 🎶",
+        title = "Melodex 🎶",
     )
 
     view.launch()
