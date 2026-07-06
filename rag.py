@@ -8,10 +8,13 @@ SYSTEM_PROMPT_TEMPLATE = """
     Keep answers concise — 2-4 sentences unless more detail is specifically asked for.
     Here is some relevant information:\n{context}
     """
+def fetch_context(question):
+    docs = retriever.invoke(question)
+    return docs
 
 def question_answer(message, history):
-    docs = retriever.invoke(message) # Extracting relevant content from the vector store
-    context = "\n".join(doc.page_content for doc in docs) # Extracting the page content
+    docs = fetch_context(message)
+    context = "\n".join(doc.page_content for doc in docs)
 
     system_prompt = SYSTEM_PROMPT_TEMPLATE.format(context = context)
 
