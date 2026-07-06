@@ -30,4 +30,4 @@ llm = ChatGroq(model = chat_model, temperature = 0, api_key = api_key)
 retriever = vector_store.as_retriever()
 
 # Judge LLM for evaluation
-judge = "groq/openai/gpt-oss-120b"
+judge = "groq/llama-3.3-70b-versatile"
