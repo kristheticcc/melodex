@@ -1,3 +1,5 @@
+import time
+
 from pydantic import BaseModel, Field
 from rag import question_answer, fetch_context
 from litellm import completion
@@ -107,6 +109,7 @@ def evaluate_all_answers():
         result = evaluate_answer(test)
         progress = (index + 1) / total
         yield test, result, progress
+        time.sleep(10)
 
 
 # For personal testing
