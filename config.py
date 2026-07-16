@@ -35,3 +35,6 @@ judge = "groq/llama-3.3-70b-versatile"
 
 # LLM for query rewriting
 rewriter = ChatGroq(model = "llama-3.3-70b-versatile", temperature = 0, api_key = api_key)
+
+# Cross-encoding model
+cross_encoding_model = "cross-encoder/ms-marco-MiniLM-L-6-v2"

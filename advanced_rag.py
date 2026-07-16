@@ -2,8 +2,11 @@
 
 from langchain_classic.retrievers import MultiQueryRetriever
 from langchain_classic.retrievers import ContextualCompressionRetriever
-from langchain_classic.retrievers.document_compressors import LLMChainExtractor
+from langchain_classic.retrievers.document_compressors import CrossEncoderReranker
 from config import retriever, rewriter
+from langchain_community.cross_encoders import HuggingFaceCrossEncoder
+from config import cross_encoding_model
+# from langchain_classic.retrievers.document_compressors import LLMChainExtractor
 
 def get_pro_retriever():
 
@@ -14,16 +17,19 @@ def get_pro_retriever():
         include_original=True,
     )
 
-    print(multi_query_retriever.llm_chain)
+    # Re-ranker: Uses a cross-encoder to re-rank the retrieved documents based on their relevance to the query
+    cross_encoder = HuggingFaceCrossEncoder(model_name=cross_encoding_model)
+    reranker = CrossEncoderReranker(model=cross_encoder, top_n=5)
 
-    # Compressor: Uses LLM to remove irrelevant information from the retrieved content
-    compressor = LLMChainExtractor.from_llm(rewriter)
+    # Compressor: Uses LLM to remove irrelevant information from the retrieved content (EXCLUDED)
+    # compressor = LLMChainExtractor.from_llm(rewriter)
 
-    # Chaining the two objects together
+    # Chaining the two objects together: Multi query retrieves, and re-ranker ranks and filters
     pro_retriever = ContextualCompressionRetriever(
-        base_compressor = compressor,
+        base_compressor = reranker,
         base_retriever = multi_query_retriever
     )
+
 
     return pro_retriever
 

@@ -1,7 +1,10 @@
+# Imports
+
 from config import llm, retriever
 from langchain_core.messages import SystemMessage, HumanMessage
 from advanced_rag import pro_retriever
 
+# System prompt to guide LLM's behavior
 SYSTEM_PROMPT_TEMPLATE = """
     You are Melodex, a friendly music assistant that knows everything about artists and albums.
     Answer conversationally in plain prose, like you're talking to a friend. 
@@ -11,11 +14,12 @@ SYSTEM_PROMPT_TEMPLATE = """
     Here is some relevant information:\n{context}
     """
 
-
+# Extract relevant content from the vector store
 def fetch_context(question):
     docs = pro_retriever.invoke(question)
     return docs
 
+# prompt builder + LLM response to user question
 def question_answer(message, history):
     docs = fetch_context(message)
     context = "\n".join(doc.page_content for doc in docs)
