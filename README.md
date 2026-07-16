@@ -6,6 +6,7 @@ Melodex is a conversational AI assistant built over a curated music knowledge ba
 ---
 
 ## Demo
+Here's a link to a video demo of the system in action: [Melodex Demo](https://youtu.be/AJXIvFhKQyM)
 
 Ask Melodex about artists, albums, members, release dates, or comparisons:
 - *"Who is Hanni from NewJeans?"*
